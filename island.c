@@ -69,18 +69,20 @@ void *storage_device_routine(void *arg)
 int main(void)
 {
 
-    pthread_t frontend,backend;
+    pthread_t frontend,backend,switchend;
     void *context = zmq_ctx_new();
 
     s_sleep(100);
 
     pthread_create(&frontend, NULL, volume_directer_routine, context);
     s_sleep(1000);
-    pthread_create(&frontend, NULL, switcher_routine, context);
+    pthread_create(&switchend, NULL, switcher_routine, context);
     s_sleep(1000);
     pthread_create(&backend, NULL, storage_device_routine, context);
 
     s_sleep(1000000);
+    
+    //我喜欢简单粗暴.. 所有没有关闭线程就退出了:)
     return 0;
 
 }
