@@ -26,7 +26,7 @@ void build_request(void *msg, entity src, entity dest, entity target,
     assert(msg != NULL);
     build_head(msg, src, dest, target, req_id, operate, 0, offset, len);
 
-    if (len > 0) {
+    if (len > 0 && data != NULL) {
         memcpy(msg + sizeof(msg_head), data, len);
     }
 }
@@ -37,7 +37,7 @@ void build_reply(void *msg, entity src, entity dest, entity target,
     assert(msg != NULL);
     build_head(msg, src, dest, target, req_id, operate, status, 0, len);
 
-    if (len > 0) {
+    if (len > 0 && data != NULL) {
         memcpy(msg + sizeof(msg_head), data, len);
     }
 
